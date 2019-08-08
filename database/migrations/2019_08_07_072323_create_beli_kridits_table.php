@@ -15,14 +15,17 @@ class CreateBeliKriditsTable extends Migration
     {
         Schema::create('beli_kridits', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->Integer('kridit_kode');
-            $table->String('pembeli_no_ktp');
-            $table->Integer('paket_kode');
-            $table->Integer('motor_kode');
-            $table->Date('kridit_tanggal');
-            $table->Bool('fotokopi_ktp');
-            $table->Bool('fotokopi_kk');
-            $table->Bool('fotokopi_slip_gaji');
+            $table->string('kode_kridit');
+            $table->bigInteger('No_KTP')->unsigned();
+            $table->foreign('No_KTP')->references('id')->on('beli_kridits');
+            $table->bigInteger('kode_paket')->unsigned();
+            $table->foreign('kode_paket')->references('id')->on('beli_kridits');
+            $table->bigInteger('kode_motor')->unsigned();
+            $table->foreign('kode_motor')->references('id')->on('beli_kridits');
+            $table->date('kridit_tanggal');
+            $table->binary('fotokopi_KTP');
+            $table->binary('fotokopi_KK');
+            $table->binary('fotokopi_gaji');
             $table->timestamps();
         });
     }
