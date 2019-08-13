@@ -47,6 +47,13 @@
                     {{-- --}}
                     @else
                     <li class="nav-item">
+                        <a class="nav-link" href="">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Menu</a>
+                    </li>
+                    @endguest
+                </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
