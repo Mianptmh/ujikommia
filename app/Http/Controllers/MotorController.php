@@ -13,7 +13,8 @@ class MotorController extends Controller
      */
     public function index()
     {
-        //
+        $motor = Motor::all();
+        return view('admin.motor.index', compact('motor'));
     }
 
     /**
@@ -23,7 +24,13 @@ class MotorController extends Controller
      */
     public function create()
     {
-        //
+        $motor = Motor::all();
+        $response =[
+            'suscces'=>true,
+            'data'=>$motor,
+            'massage'=>'berhasil'
+        ];
+        return response()->json($response,200); 
     }
 
     /**
@@ -34,7 +41,14 @@ class MotorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $motor = new Motor();
+        $motor->name = $request->name;
+        $motor->email = $request->email;
+        $motor->password = bcrypt($request->password);
+        $motor->save;
+        $role = Role::where('name','superadmin')->first();
+        $motor->attachRole($role);
+        return response()->json('berhasil');
     }
 
     /**
@@ -45,7 +59,13 @@ class MotorController extends Controller
      */
     public function show($id)
     {
-        //
+        $motor = Motor::findOrFaill($id);
+        $response =[
+            'suscces'=>true,
+            'data'=>$motor,
+            'massage'=>'berhasil'
+        ];
+        return response()->json($response,200); 
     }
 
     /**
@@ -56,7 +76,13 @@ class MotorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $motor = $Motor::findOrFaill($id);
+        $response =[
+            'suscces'=>true,
+            'data'=>$motor,
+            'massage'=>'berhasil'
+        ];
+        return response()->json($response,200); 
     }
 
     /**
@@ -68,7 +94,14 @@ class MotorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $motor = Motor::findOrFaill($id);
+        $motor->name = $request->name;
+        $motor->email = $request->email;
+        $motor->password = bcrypt($request->password);
+        $motor->save;
+        $role = Role::where('name','superadmin')->first();
+        $motor->attachRole($role);
+        return response()->json('berhasil');
     }
 
     /**
