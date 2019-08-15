@@ -26,6 +26,24 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                <a class="navbar-brand" href="{{ url('/backend/motor') }}">
+                    Motor
+                </a>
+                <a class="navbar-brand" href="{{ url('/backend/pembeli') }}">
+                    Pembeli
+                </a>
+                <a class="navbar-brand" href="{{ url('/backend/bayar cicilan') }}">
+                    Bayar Cicilan
+                </a>
+                <a class="navbar-brand" href="{{ url('/backend/beli cash') }}">
+                    Beli Cash
+                </a>
+                <a class="navbar-brand" href="{{ url('/backend/beli kridit') }}">
+                    Beli Kridit
+                </a>
+                <a class="navbar-brand" href="{{ url('/backend/kridit paket') }}">
+                    Kridit Paket
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

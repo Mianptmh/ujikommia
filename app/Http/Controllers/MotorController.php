@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Motor;
 
 class MotorController extends Controller
 {
@@ -14,7 +15,7 @@ class MotorController extends Controller
     public function index()
     {
         $motor = Motor::all();
-        return view('admin.motor.index', compact('motor'));
+        return view('Motor.index', compact('motor'));
     }
 
     /**
@@ -24,13 +25,7 @@ class MotorController extends Controller
      */
     public function create()
     {
-        $motor = Motor::all();
-        $response =[
-            'suscces'=>true,
-            'data'=>$motor,
-            'massage'=>'berhasil'
-        ];
-        return response()->json($response,200); 
+        return view ('Motor.create');
     }
 
     /**

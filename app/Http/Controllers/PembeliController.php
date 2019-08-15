@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pembeli;
 
 class PembeliController extends Controller
 {
@@ -13,7 +14,8 @@ class PembeliController extends Controller
      */
     public function index()
     {
-        //
+        $pembeli = Pembeli::all();
+        return view('Pembeli.index', compact('pembeli'));
     }
 
     /**
@@ -23,7 +25,7 @@ class PembeliController extends Controller
      */
     public function create()
     {
-        return view ('backend.pembeli.create');
+        return view ('Pembeli.create');
     }
 
     /**
@@ -35,17 +37,17 @@ class PembeliController extends Controller
     public function store(Request $request)
     {
         $pembeli = new Pembeli();
-        $pembeli->pembeli_no_ktp = $request->pembeli_no_ktp;
-        $pembeli->pembeli_nama = $request->pembeli_nama;
-        $pembeli->pembeli_alamat = $request->pembeli_alamat;
-        $pembeli->pembeli_telepon = $request->pembeli_telepon;
-        $pembeli->pembeli_HP = $request->pembeli_HP;
+        $pembeli->NO_KTP = $request->NO_KTP;
+        $pembeli->nama_pembeli = $request->nama_pembeli;
+        $pembeli->alamat_pembeli = $request->alamat_pembeli;
+        $pembeli->no_tlp_pembeli = $request->no_tlp_pembeli;
+        $pembeli->hp_pembeli = $request->hp_pembeli;
 
         $pembeli->save();
         Session::flash("flash_notification",[
             "level" => "success",
             "message" => "Berhasil Di Edit <b>"
-                         . $pembeli->pembeli_nama."</b>"
+                         . $pembeli->nama_pembeli."</b>"
         ]);
         return redirect()->route('pembeli.index');
     }
@@ -83,16 +85,16 @@ class PembeliController extends Controller
     {
         $pembeli = new Pembeli();
         $pembeli->pembeli_no_ktp = $request->pembeli_no_ktp;
-        $pembeli->pembeli_nama = $request->pembeli_nama;
-        $pembeli->pembeli_alamat = $request->pembeli_alamat;
-        $pembeli->pembeli_telepon = $request->pembeli_telepon;
-        $pembeli->pembeli_HP = $request->pembeli_HP;
+        $pembeli->nama_pembeli = $request->nama_pembeli;
+        $pembeli->alamat_pembeli = $request->alamat_pembeli;
+        $pembeli->no_tlp_pembeli = $request->no_tlp_pembeli;
+        $pembeli->hp_pembeli = $request->hp_pembeli;
 
         $pembeli->save();
         Session::flash("flash_notification",[
             "level" => "success",
             "message" => "Berhasil Di <b>"
-                         . $pembeli->pembeli_nama."</b>"
+                         . $pembeli->nama_pembeli."</b>"
         ]);
         return redirect()->route('pembeli.index');
     }

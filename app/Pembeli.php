@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pembeli extends Model
 {
     protected $table="pembelis";
-    protected $primaryKey="pembeli_no_ktp";
-    protected $fillable=['pembeli_nama','pembeli_alamat',
-                        'pembeli_telepon','pembeli_hp'];
+    protected $primaryKey="NO_KTP";
+    protected $fillable=['nama_pembeli','alamat_pembeli',
+                        'no_tlp_pembeli','hp_pembeli'];
 }

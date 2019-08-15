@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Motor extends Model
 {
     protected $table="motors";
-    protected $primaryKey="motor_kode";
-    protected $fillable=['motor_merk','motor_type',
-                        'motor_warna_pilihan','motor_harga','motor_gambar'];  
+    protected $primaryKey="kode_motor";
+    protected $fillable=['merk_kode','type_motor',
+                        'warna_motor','harga_motor','gambar_motor'];  
 }
