@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <section class="page-content container-fluid">
     <div class="row">
@@ -27,8 +26,8 @@
                 <div class="form-group">
                     <label for="">merk</label>
                     <input class="form-control
-                    @error('merk motor') is-invalid @enderror" type="text"
-                    name="merk motor" id="" required>
+                    @error('merk_motor') is-invalid @enderror" type="text"
+                    name="merk_motor" id="" required>
                     @error('merk motor')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{$message}}</strong>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pembeli;
+use App\Role;
 
 class PembeliController extends Controller
 {
@@ -41,15 +42,25 @@ class PembeliController extends Controller
         $pembeli->nama_pembeli = $request->nama_pembeli;
         $pembeli->alamat_pembeli = $request->alamat_pembeli;
         $pembeli->no_tlp_pembeli = $request->no_tlp_pembeli;
-        $pembeli->hp_pembeli = $request->hp_pembeli;
+        //foto
+        if($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $path = public_patch() .'/assets/img/Pembeli';
+            $filename = str_random(6) .'_'
+            . $file->getClientOriginalName();
+            $upload = $file->move(
+                $path,$filename
+            );
+            $Pembeli->foto = $filename;
+        }
 
         $pembeli->save();
         Session::flash("flash_notification",[
-            "level" => "success",
-            "message" => "Berhasil Di Edit <b>"
-                         . $pembeli->nama_pembeli."</b>"
+            "level" => "Succes",
+            "message" => "Berhasil Menyimpan<b>"
+                        . $Pembeli->type_Pembeli,"</b>"
         ]);
-        return redirect()->route('pembeli.index');
+        return redirect()->route('Pembeli.index');
     }
 
     /**
@@ -60,7 +71,8 @@ class PembeliController extends Controller
      */
     public function show($id)
     {
-        //
+        $pembeli = Pembeli::findOrFail($id);
+        return view('Pembeli.show',compact('pembeli'));
     }
 
     /**
@@ -71,7 +83,8 @@ class PembeliController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pembeli = Pembeli::findOrFail($id);
+        return view('Pembeli.edit',compzct('pembeli'));
     }
 
     /**
@@ -84,19 +97,30 @@ class PembeliController extends Controller
     public function update(Request $request, $id)
     {
         $pembeli = new Pembeli();
-        $pembeli->pembeli_no_ktp = $request->pembeli_no_ktp;
+        $pembeli->NO_KTP = $request->NO_KTP;
         $pembeli->nama_pembeli = $request->nama_pembeli;
         $pembeli->alamat_pembeli = $request->alamat_pembeli;
         $pembeli->no_tlp_pembeli = $request->no_tlp_pembeli;
-        $pembeli->hp_pembeli = $request->hp_pembeli;
+        $pembeli->harga_hp_pembeli = $request->hp_pembeli;
+        //foto
+        if($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $path = public_patch() .'/assets/img/artikel';
+            $filename = str_random(6) .'_'
+            . $file->getClientOriginalName();
+            $upload = $file->move(
+                $path,$filename
+            );
+            $pembeli->foto = $filename;
+        }
 
         $pembeli->save();
         Session::flash("flash_notification",[
-            "level" => "success",
-            "message" => "Berhasil Di <b>"
-                         . $pembeli->nama_pembeli."</b>"
+            "level" => "Succes",
+            "message" => "Berhasil Menyimpan<b>"
+                        . $Pembeli->type_Pembeli,"</b>"
         ]);
-        return redirect()->route('pembeli.index');
+        return redirect()->route('Pembeli.index');
     }
 
     /**
@@ -107,13 +131,13 @@ class PembeliController extends Controller
      */
     public function destroy($id)
     {
-        $pembeli = Pembeli::findOrfail($id)->delete();
-        //Session::flash("flash_notification",[
-            // "level" => "Success",
-            // "message" => "Berhasil menghapus<b>"
-             //             . pembeli->nama_pembeli."</b>"
-        // ]);
-        return redirect()->route('pembeli.index');
-
+        $pembeli = Pembeli::findOrFail($id);
+        if(!Pembeli::destory($id)) return redirect()->back();
+        Session::flah("flash_notification",[
+            "level" => "Succes",
+            "message" => "Berhasil Menghapus<b>"
+                        . $Pembeli->NO_KTP."</b>"
+        ]);
+        return redirect()->route('Pembeli.index');
     }
 }

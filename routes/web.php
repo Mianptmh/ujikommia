@@ -22,5 +22,9 @@ Route::group(['prefix' => 'backend', 'middleware' => ['auth','role:admin']], fun
 Route::resource('user', 'UserController');
 route::resource('motor','MotorController');
 route::resource('pembeli','PembeliController');
+route::resource('bayarcicilan','BayarCicilanController');
+route::resource('belicase','BeliCaseController');
+route::resource('belikridit','BeliKriditController');
+route::resource('kriditpaket','KriditPaketController');
 });
 

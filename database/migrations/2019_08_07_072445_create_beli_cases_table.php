@@ -16,10 +16,10 @@ class CreateBeliCasesTable extends Migration
         Schema::create('beli_cases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('cash_kode');
-            $table->bigInteger('pembeli_no_ktp')->unsigned();
-            $table->foreign('pembeli_no_ktp')->references('id')->on('beli_cases');
-            $table->bigInteger('motor_kode')->unsigned();
-            $table->foreign('motor_kode')->references('id')->on('beli_cases');
+            $table->unsignedBigInteger('pembeli_KTP');
+            $table->foreign('pembeli_KTP')->references('id')->on('pembelis')->ondelete('cascade');
+            $table->unsignedBigInteger('motor_kode');
+            $table->foreign('motor_kode')->references('id')->on('motors')->ondelete('cascade');
             $table->Date('cash_tanggal');
             $table->Double('cash_bayar');
             $table->timestamps();

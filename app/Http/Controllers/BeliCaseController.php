@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\BeliCase;
+use App\Role;
 
 class BeliCaseController extends Controller
 {
@@ -13,7 +15,8 @@ class BeliCaseController extends Controller
      */
     public function index()
     {
-        //
+        $belicase = BeliCase::all();
+        return view('BeliCase.index', compact('belicase'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Motor;
+use App\Role;
 
 class MotorController extends Controller
 {
@@ -37,13 +38,29 @@ class MotorController extends Controller
     public function store(Request $request)
     {
         $motor = new Motor();
-        $motor->name = $request->name;
-        $motor->email = $request->email;
-        $motor->password = bcrypt($request->password);
-        $motor->save;
-        $role = Role::where('name','superadmin')->first();
-        $motor->attachRole($role);
-        return response()->json('berhasil');
+        $motor->kode_motor = $request->kode_motor;
+        $motor->merk_motor = $request->merk_motor;
+        $motor->type_motor = $request->type_motor;
+        $motor->warna_motor = $request->warna_motor;
+        $motor->harga_motor = $request->harga_motor;
+        //foto
+        if($request->hasFile('gambar_motor')) {
+            $file = $request->file('gambar_motor');
+            $path = public_patch() .'/assets/img/motor';
+            $filename = str_random(6) .'_'
+            . $file->getClientOriginalName();
+            $upload = $file->move(
+                $path,$filename
+            );
+            $motor->gambar_motor = $filename;
+        }
+        $motor->save();
+        Session::flash("flash_notification",[
+            "level" => "Succes",
+            "message" => "Berhasil Menyimpan<b>"
+                        . $motor->type_motor,"</b>"
+        ]);
+        return redirect()->route('motor.index');
     }
 
     /**
@@ -54,13 +71,8 @@ class MotorController extends Controller
      */
     public function show($id)
     {
-        $motor = Motor::findOrFaill($id);
-        $response =[
-            'suscces'=>true,
-            'data'=>$motor,
-            'massage'=>'berhasil'
-        ];
-        return response()->json($response,200); 
+        $motor = Motor::findOrFail($id);
+        return view('amotor.show',compact('motor'));
     }
 
     /**
@@ -71,13 +83,8 @@ class MotorController extends Controller
      */
     public function edit($id)
     {
-        $motor = $Motor::findOrFaill($id);
-        $response =[
-            'suscces'=>true,
-            'data'=>$motor,
-            'massage'=>'berhasil'
-        ];
-        return response()->json($response,200); 
+        $motor = Motor::findOrFail($id);
+        return view('Motor.edit',compzct('motor'));
     }
 
     /**
@@ -89,14 +96,31 @@ class MotorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $motor = Motor::findOrFaill($id);
-        $motor->name = $request->name;
-        $motor->email = $request->email;
-        $motor->password = bcrypt($request->password);
-        $motor->save;
-        $role = Role::where('name','superadmin')->first();
-        $motor->attachRole($role);
-        return response()->json('berhasil');
+        $motor = new Motor();
+        $motor->kode_motor = $request->kode_motor;
+        $motor->merk_motor = $request->merk_motor;
+        $motor->type_motor = $request->type_motor;
+        $motor->warna_motor = $request->warna_motor;
+        $motor->harga_motor = $request->harga_motor;
+        //foto
+        if($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $path = public_patch() .'/assets/img/artikel';
+            $filename = str_random(6) .'_'
+            . $file->getClientOriginalName();
+            $upload = $file->move(
+                $path,$filename
+            );
+            $motor->foto = $filename;
+        }
+
+        $motor->save();
+        Session::flash("flash_notification",[
+            "level" => "Succes",
+            "message" => "Berhasil Menyimpan<b>"
+                        . $motor->type_motor,"</b>"
+        ]);
+        return redirect()->route('motor.index');
     }
 
     /**
@@ -107,13 +131,13 @@ class MotorController extends Controller
      */
     public function destroy($id)
     {
-        $motor = Motor::findOrfail($id)->delete();
-        //Session::flash("flash_notification",[
-            // "level" => "Success",
-            // "message" => "Berhasil menghapus<b>"
-             //             . $motor->nama_motor."</b>"
-        // ]);
+        $motor = Motor::findOrFail($id);
+        if(!Motor::destory($id)) return redirect()->back();
+        Session::flah("flash_notification",[
+            "level" => "Succes",
+            "message" => "Berhasil Menghapus<b>"
+                        . $motor->type_motor."</b>"
+        ]);
         return redirect()->route('motor.index');
-
     }
 }

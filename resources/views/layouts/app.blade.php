@@ -32,16 +32,16 @@
                 <a class="navbar-brand" href="{{ url('/backend/pembeli') }}">
                     Pembeli
                 </a>
-                <a class="navbar-brand" href="{{ url('/backend/bayar cicilan') }}">
+                <a class="navbar-brand" href="{{ url('/backend/bayarcicilan') }}">
                     Bayar Cicilan
                 </a>
-                <a class="navbar-brand" href="{{ url('/backend/beli cash') }}">
+                <a class="navbar-brand" href="{{ url('/backend/belicash') }}">
                     Beli Cash
                 </a>
-                <a class="navbar-brand" href="{{ url('/backend/beli kridit') }}">
+                <a class="navbar-brand" href="{{ url('/backend/belikridit') }}">
                     Beli Kridit
                 </a>
-                <a class="navbar-brand" href="{{ url('/backend/kridit paket') }}">
+                <a class="navbar-brand" href="{{ url('/backend/kriditpaket') }}">
                     Kridit Paket
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

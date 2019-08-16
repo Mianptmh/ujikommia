@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <section class="page-content container-fluid">
     <div class="row">
@@ -13,7 +12,7 @@
                     <form action="{{route('pembeli.store')}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group">
-                    <label for="">Kode</label>
+                    <label for="">No Ktp</label>
                     <input class="form-control
                     @error('NO_KTP') is-invalid @enderror" type="text"
                     name="NO_KTP" id="" required>
